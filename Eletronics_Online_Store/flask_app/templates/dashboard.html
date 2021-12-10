@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>eCommerce</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: grey;
+            margin: 1em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-white" style="background-color: #191919;">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Dashboard</h1>
+            <h4 class="text-center">Hi, {{logged_in_user.first_name}}. Welcome!</h4>
+        </div>  
+        <div class="d-flex justify-content-end">
+            <a href="/orders/status" class="my-3 btn btn-success text-white">Order Status</a>
+            <a href="/orders/history" class="my-3 btn btn-success text-white">Order History</a>
+            <a href="/browse/saved" class="my-3 btn btn-success text-white">Saved Items</a>
+            <a href="/browse/viewed" class="my-3 btn btn-success text-white">Recently Viewed Items</a>
+            <a href="/" class="my-3 btn btn-success text-white">Logout</a>
+        </div>
+    </header>
+
+    <table>
+        <thead>
+            <th>Product</th>
+            <th>Order Date:</th>
+            <th>Order Total:</th>
+            <!-- <th>Order #:</th>
+            <th>Deliveryed On:</th>
+            <th>Tracking Number:</th> -->
+        </thead>
+        <tbody>
+            {% if logged_in_user.id == session["user.id"] %}
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.name}}</td>
+                    <td>{{order.order_date}}</td>
+                    <td>{{order.total}}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+

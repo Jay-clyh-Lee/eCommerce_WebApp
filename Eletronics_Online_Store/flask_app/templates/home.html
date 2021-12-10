@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- IMAGE WON"T LOAD -->
+    <!-- HOW TO MAKE IMAGE LINKS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Home Page</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: grey;
+            margin: 1em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="d-flex justify-content-around align-items-center" style="background-color: skyblue;">
+        <div class="d-flex justify-content-around align-items-center">
+            <!-- <a href="/"><img src="" alt="">Company Logo</a> -->
+            <img src="" alt=""><a href="/">Company Logo</a>
+            <div class="dropdown show" id="products">
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Products</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/products">Products</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+            <div class="dropdown show" id="deals">
+                <!-- dropdown-toggle has downward arrow -->
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Deals</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+            <!-- <a href="">Solutions</a>
+            <a href="">Industries</a>
+            <a href="">For you</a> -->
+        </div>
+        <div>
+            <a href="/support" class="">Support</a>
+            <!-- {% if logged_in_user.id == session["user.id"] %}
+                <a href="/{{user.id}}/cart" class="my-3 btn btn-primary text-white">Cart</a>
+            {% else %} -->
+                <a href="/cart" class="my-3 btn btn-primary text-white">Cart</a>
+            <!-- {% endif %} -->
+            <a href="/login_page" class="my-3 btn btn-success text-white">Login</a>
+            <a href="/signup_page" class="my-3 btn btn-success text-white">Sign Up</a>
+            <button class="btn btn-warning">Dark Mode</button>
+        </div>
+    </header>
+    <div id="deals">
+        <h1>HOT DEALS:</h1>
+    </div>
+    <main class="d-flex flex-column bg-light p-2">
+        <div class="row d-flex justify-content-around p-2 mx-5 my-2">
+            <p class="text-white">PC</p>
+            <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
+                <a href="">Desktops
+                    <img src="static\images\pc.jpg" alt="pc">
+                </a>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
+                <a href="">Laptops<img src="" alt="laptop"></a>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
+                <a href="">Workstations<img src="" alt="worktation"></a>
+            </div>
+            <!-- <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
+                <a href="">Monitors<img src="" alt=""></a>
+            </div> -->
+        </div>
+<!-- 
+        <div class="row bg-dark d-flex justify-content-around p-2 mx-5 my-2">
+            <p class="text-white">Home Appliance</p>
+            <div class="col text-center text-white mx-2"><a href=""><img src="" alt=""></a>TV</div>
+            <div class="col text-center text-white"><a href=""><img src="" alt=""></a>Washer/Dryer</div>
+            <div class="col text-center text-white"><a href=""><img src="" alt=""></a>Fridge</div>
+        </div>
+
+        <div class="row bg-dark d-flex justify-content-around p-2 mx-5 my-2">
+            <p class="text-white">Eletronics</p>
+            <div class="col text-center text-white"><a href=""><img src="" alt=""></a>Col 1</div>
+            <div class="col text-center text-white"><a href=""><img src="" alt=""></a>Col 2</div>
+            <div class="col text-center text-white"><a href=""><img src="" alt=""></a>Col 3</div>
+        </div> -->
+    </main>
+    <div id="browsed">
+        <h1>Your Browsing History</h1>
+    </div>
+    <div id="recommended">
+        <h1>Recommended based on Your Order and Browsing History</h1>
+    </div>
+
+
+    <footer class="bg-light flex-column p-2" id="footer">
+        <!-- <div class="row bg-light d-flex justify-content-around p-2 mx-5 my-2">
+            <p><strong>Get started</strong></p>
+            <p>Pricing</p>
+            <p>Individual</p>
+            <p>Team</p>
+            <p>Enterprise</p>
+            <p>Contact sales</p>
+        </div> -->
+        This is footer (to be filled)
+    </footer>
+</body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Arbortrary</title>
+</head>
+
+<body>
+    <header>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Arbotrary</h2>
+            <div class="d-flex justify-content-around align-items-center">
+                <a href="/user/account">My Trees</a>
+                <h2 class="text-center">Welcome {{logged_in_user.first_name}}, {{logged_in_user.last_name}}!</h2>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p>A site to track randomly planted trees</p>
+            <div class="d-flex justify-content-around ">
+            <a href="/dashboard" class="my-3 btn btn-success text-white">Dashboard</a>
+            <a href="/" class="my-3 btn btn-success text-white">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="d-flex flex-column"></div>
+        <div>
+            <h1>{{tree.species}} planted by {{tree.user.first_name}} {{tree.user.last_name}}</h1>
+        </div>
+    <div id="row" class="d-flex justify-content-between">
+        <div>
+            <h2>Where: {{tree.locations}} </h2>
+            <h2>When: {{tree.date_planted.strftime('%m/%d/%Y')}}</h2>
+            <h2>Reason: {{tree.reasons}} </h2>
+            <!-- <h3>POST ON: {{tree.created_at.strftime('%m/%d/%Y')}}</h3> -->
+            <!-- <p>{{ tree.content }}</p> -->
+        </div>
+        <div>
+            <h2><strong>Visited By:</strong></h2>
+            {% for visitor in tree.visitors: %}
+                <p>{{visitor}}</p>
+            {% endfor %}
+            <!-- <br> DO NOT KNOW WHAT TO DO YET -->
+            <a href="#">Did you visit this tree?</a> 
+        </div>
+    </div>
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Arbortrary</title>
+</head>
+
+<body>
+    <header>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Arbotrary</h2>
+            <div class="d-flex justify-content-around align-items-center">
+                <h2 class="text-center">Welcome {{logged_in_user.first_name}}, {{logged_in_user.last_name}}!</h2>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <p>A site to track randomly planted trees</p>
+            <div class="d-flex justify-content-around ">
+            <a href="/dashboard" class="my-3 btn btn-success text-white">Dashboard</a>
+            <a href="/" class="my-3 btn btn-success text-white">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <table>
+        <thead>
+            <th>Species</th>
+            <th>Date Planted</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for tree in all_trees %}
+            <tr>
+                <td>{{tree.species}}</td>
+                <td>{{tree.date_planted.strftime('%m/%d/%Y')}}</td>
+                <td>
+                    <a href="/trees/{{tree.id}}/edit">edit</a>
+                    <a href="/trees/{{tree.id}}/delete">delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
+
+
