@@ -17,14 +17,7 @@ class Product:
         self.updated_at = db_data["updated_at"]
         self.total_sold += 1
 
-    @classmethod
-    def create_order(cls, form_data):
-        query = "INSERT INTO products (name, price, in_stock, user_id, category_id VALUES (%(name)s, %(price)s, %(in_stock)s, %(user_id)s, %(category_id)s);"
-        return connectToMySQL(cls.db).query_db(query, form_data)
 
-    @classmethod
-    def cancel_order(cls, form_data):
-        query = "DELETE FROM products WHERE id "
 
     @classmethod
     def get_all(cls):

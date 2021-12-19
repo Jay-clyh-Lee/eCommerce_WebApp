@@ -53,8 +53,18 @@ def dashboard():
     data = {
         "id": session["user_id"]
     }
-    #messages_user_liked = tree.Tree.get_all_liked_messages(data)
-    return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), all_trees = tree.Tree.get_all()) #messages_user_liked=messages_user_liked
+    return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), all_trees = tree.Tree.get_all())
+
+@app.route('/update', methods=['POST'])
+def update():
+    if "user_id" not in session:
+        return redirect('/')
+    
+    data = {
+        "title": request.form['title']       
+    }
+    user.User.update_user(request.form)
+    return redirect('/dashboard')
 
 @app.route('/user/account')
 def account():

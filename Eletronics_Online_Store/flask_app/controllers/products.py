@@ -14,7 +14,8 @@ def create_order(category_id, product_id):
     order_data = {
         "id": session["user_id"],
         "category_id": category_id,
-        "product_id": product_id 
+        "product_id": product_id,
+        "shipping_address": request.form["shipping_address"],
     }
     product.Product.create_order(order_data)
     return redirect('product.html')

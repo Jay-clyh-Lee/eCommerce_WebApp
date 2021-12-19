@@ -12,6 +12,7 @@ class User:
 
     def __init__(self, data):
         self.id = data['id']
+        self.title = data['title']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -20,21 +21,19 @@ class User:
         self.address = data['address']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.purchases = []
+        self.orders = []
+
 
     @classmethod
     def create_user(cls, data):
-        query = "INSERT INTO users (first_name, last_name, email, password, birthday, address) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(birthday)s, %(address)s);"
+        query = "INSERT INTO users (title, first_name, last_name, email, password, birthday, address) VALUES (%(title)s, %(first_name)s, %(last_name)s, %(email)s, %(password)s, %(birthday)s, %(address)s);"
         return connectToMySQL(cls.db).query_db(query,data)
         
-    @classmethod
-    def delete_user(cls, form_data):
-        query = "DELETE FROM users WHERE id = %(id)s;"
-        return connectToMySQL(cls.db).query_db(query, form_data)
+
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM users LEFT JOIN trees ON trees.user_id = id;"
+        query = "SELECT * FROM users LEFT JOIN orders ON orders.user_id = id;"
         results = connectToMySQL(cls.db).query_db(query) 
         users = []
         for u in results:
@@ -57,7 +56,15 @@ class User:
             return False
         return cls(results[0])
 
-        
+    @classmethod
+    def update_user(cls, form_data):
+        query = "UDPATE users SET title=%(title)s, first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, title=%(title)s, password=%(password)s, birthday=%(birthday)s, address=%(address)s WHERE id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query, form_data)
+
+    @classmethod
+    def delete_user(cls, form_data):
+        query = "DELETE FROM users WHERE id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query, form_data)
 
 
     @staticmethod
