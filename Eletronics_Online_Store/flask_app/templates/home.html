@@ -17,6 +17,10 @@
             margin: 1em;
             font-weight: 500;
         }
+        .dark-mode {
+			background-color: #222;
+			color: #e6e6e6;
+		}
     </style>
 </head>
 <body>
@@ -54,13 +58,28 @@
             <!-- {% endif %} -->
             <a href="/login_page" class="my-3 btn btn-success text-white">Login</a>
             <a href="/signup_page" class="my-3 btn btn-success text-white">Sign Up</a>
-            <button class="btn btn-warning">Dark Mode</button>
+
+            <!-- HOVER EFFECT CODE HERE::: -->
+            <!-- <div class='column' id='middleBlock'>
+                <img src="images/succulents-1.jpg" onmouseover='this.src="images/succulents-2.jpg"' onmouseout='this.src="images/succulents-1.jpg"'
+                alt="hover effect">
+            </div> -->
+
+            <button onclick="Switch_Mode()" class="btn btn-warning">Dark Mode</button>
         </div>
+        <script>
+            function Switch_Mode() {
+                var element = document.body;
+                console.log('Dark Mode button clicked');
+                element.classList.toggle("dark-mode");
+            }
+        </script>
     </header>
+
     <div id="deals">
         <h1>HOT DEALS:</h1>
     </div>
-    <main class="d-flex flex-column bg-light p-2">
+    <main class="d-flex flex-column p-2">
         <div class="row d-flex justify-content-around p-2 mx-5 my-2">
             <p class="text-white">PC</p>
             <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
@@ -101,7 +120,7 @@
     </div>
 
 
-    <footer class="bg-light flex-column p-2" id="footer">
+    <footer class="flex-column p-2" id="footer">
         <!-- <div class="row bg-light d-flex justify-content-around p-2 mx-5 my-2">
             <p><strong>Get started</strong></p>
             <p>Pricing</p>
@@ -112,4 +131,8 @@
         </div> -->
         This is footer (to be filled)
     </footer>
+
+
+    <!-- <script src="static/javascript/script.js"></script> -->
 </body>
+</html>
