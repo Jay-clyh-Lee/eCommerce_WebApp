@@ -8,7 +8,7 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- IMAGE WON"T LOAD -->
     <!-- HOW TO MAKE IMAGE LINKS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
     <title>Home Page</title>
     <style>
         a {
@@ -24,21 +24,39 @@
     </style>
 </head>
 <body>
-    <header class="d-flex justify-content-around align-items-center" style="background-color: skyblue;">
-        <div class="d-flex justify-content-around align-items-center">
+    <header class="d-flex justify-content-between align-items-center" style="background-color: skyblue;">
+        <div id="header_left" class="d-flex justify-content-around align-items-center">
             <!-- <a href="/"><img src="" alt="">Company Logo</a> -->
-            <img src="" alt=""><a href="/">Company Logo</a>
-            <div class="dropdown show" id="products">
-                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Products</a>
+            <img src="" alt=""><a href="#">Company Logo</a>
+            <div class="dropdown show" id="desktops">
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Desktops</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="/products">Products</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </div>
-            <div class="dropdown show" id="deals">
+            <div class="dropdown show" id="laptops">
                 <!-- dropdown-toggle has downward arrow -->
-                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Deals</a>
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Laptops</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+            <div class="dropdown show" id="workstations">
+                <!-- dropdown-toggle has downward arrow -->
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Workstations</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+            <div class="dropdown show" id="accessories">
+                <!-- dropdown-toggle has downward arrow -->
+                <a class="dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accessories</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
@@ -76,15 +94,15 @@
         </script>
     </header>
 
-    <div id="deals">
+    <!-- <div id="deals">
         <h1>HOT DEALS:</h1>
-    </div>
+    </div> -->
     <main class="d-flex flex-column p-2">
         <div class="row d-flex justify-content-around p-2 mx-5 my-2">
-            <p class="text-white">PC</p>
+            <strong>PC</strong>
             <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
-                <a href="/category/1">Desktops
-                    <img src="static\images\pc.jpg" alt="pc">
+                <a href="/category/desktops">Desktops
+                    <img src="\Eletronics_Online_Store\flask_app\static\images\pc.jpg" alt="pc">
                 </a>
             </div>
             <div class="col d-flex align-items-center justify-content-center bg-dark text-center text-white mx-1 p-5">
@@ -118,8 +136,6 @@
     <div id="recommended">
         <h1>Recommended based on Your Order and Browsing History</h1>
     </div>
-
-
     <footer class="flex-column p-2" id="footer">
         <!-- <div class="row bg-light d-flex justify-content-around p-2 mx-5 my-2">
             <p><strong>Get started</strong></p>
@@ -131,8 +147,6 @@
         </div> -->
         This is footer (to be filled)
     </footer>
-
-
     <!-- <script src="static/javascript/script.js"></script> -->
 </body>
 </html>

@@ -4,7 +4,6 @@ from ..models import user, admin
 
 class Product:
     db = "eCommerce"
-    items_sold = 0
 
     def __init__(self, db_data) -> None:
         self.id = db_data["id"]
@@ -15,9 +14,15 @@ class Product:
         self.category_id = db_data["category_id"]
         self.created_at = db_data["created_at"]
         self.updated_at = db_data["updated_at"]
-        self.total_sold += 1
 
-
+    @classmethod
+    def get_all_by_category(cls, category):
+        query = f"SELECT * FROM products WHERE category = {category};"
+        results = connectToMySQL(cls.db).query_db(query)
+        products_in_this_category = []
+        for row in results:
+            products_in_this_category.append(cls(row))
+        return products_in_this_category
 
     @classmethod
     def get_all(cls):
