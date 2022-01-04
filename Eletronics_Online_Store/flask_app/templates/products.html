@@ -15,10 +15,12 @@
         }
     </style>
 </head>
-<body>
+<body class="mx-auto">
+    <h1>All products in this {{category}}</h1>
     {% for product in products %}
         <div class="block d-flex align-items-center justify-content-center">
             {{product}}
         </div>
+    {% endfor %}
 </body>
 </html>
