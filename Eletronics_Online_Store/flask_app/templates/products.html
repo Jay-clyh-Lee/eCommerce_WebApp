@@ -9,13 +9,16 @@
     <title>All Products - {{category}}</title>
     <style>
         .block {
-            height: 400px;
-            width: 500px;
+            height: 200px;
+            width: 300px;
             background-color: skyblue;
         }
     </style>
 </head>
 <body>
-    
+    {% for product in products %}
+        <div class="block d-flex align-items-center justify-content-center">
+            {{product}}
+        </div>
 </body>
 </html>
