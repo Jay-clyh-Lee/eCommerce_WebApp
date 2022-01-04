@@ -17,10 +17,10 @@
 </head>
 <body class="mx-auto">
     <h1>All products in this {{category}}</h1>
-    {% for product in products %}
-        <div class="block d-flex align-items-center justify-content-center">
-            {{product}}
-        </div>
-    {% endfor %}
+        {% for product in products[:10] %}
+            <div class="block d-flex align-items-center justify-content-center">
+                <a href="/product/{{product}}">{{product}}</a>
+            </div>
+        {% endfor %}
 </body>
 </html>
