@@ -12,15 +12,18 @@
             height: 200px;
             width: 300px;
             background-color: skyblue;
+            margin: 20px;
         }
     </style>
 </head>
 <body class="mx-auto">
     <h1>All products in this {{category}}</h1>
+    <div class="d-flex">
         {% for product in products[:10] %}
             <div class="block d-flex align-items-center justify-content-center">
                 <a href="/product/{{product}}">{{product}}</a>
             </div>
         {% endfor %}
+    </div>
 </body>
 </html>
