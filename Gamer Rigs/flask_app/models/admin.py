@@ -4,6 +4,7 @@ import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class Admin:
+
     db = "eCommerce"
 
     def __init__(self, data):
@@ -12,6 +13,7 @@ class Admin:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.admin_tier = data['admin_tier']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
