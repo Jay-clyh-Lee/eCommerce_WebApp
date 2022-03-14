@@ -6,8 +6,6 @@ from flask_app import app
 def show_category(category):
     return render_template("products.html", category = category, roducts = product.Product.get_all_by_category(category))
 
-
-
 @app.route('/<string:category>/products')
 def show_products():
     all_products = product.Product.get_all()
