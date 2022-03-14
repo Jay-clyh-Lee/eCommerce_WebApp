@@ -29,3 +29,5 @@ class Order:
     def cancel_order(cls, form_data):
         query = "DELETE FROM orders WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query, form_data)
+
+    
