@@ -19,3 +19,4 @@ def login_page():
 @app.route('/signup_page')
 def signup_page():
     return render_template("signup.html")
+
