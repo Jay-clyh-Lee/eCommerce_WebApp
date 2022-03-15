@@ -3,6 +3,8 @@ from flask_app.models import user, tree
 from flask_app import app
 from flask_bcrypt import Bcrypt  
 
+from 
+
 bcrypt = Bcrypt(app)
 
 # @app.route('/')
@@ -53,7 +55,7 @@ def dashboard():
     data = {
         "id": session["user_id"]
     }
-    return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), all_trees = tree.Tree.get_all())
+    return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), user_products = product.Product.get_all_by_user(data))
 
 @app.route('/update', methods=['POST'])
 def update():
