@@ -14,9 +14,8 @@
         }
     </style>
 </head>
-
 <body class="d-flex flex-column mx-auto">
-    <header class="d-flex justify-content-between">
+    <header class="d-flex justify-content-between p-5">
         <div>
             <h1>PIZZA PETE'S</h1>
         </div>
@@ -32,7 +31,7 @@
         <h2 class="text-center">Welcome {{logged_in_user.first_name}} {{logged_in_user.last_name}}!</h2>
     </div>
 
-    <main class="d-flex">
+    <main class="d-flex justify-content-around p-3">
         <form action="/register" method="post" class="col-5 mx-auto rounded p-5">
             <div class="text-danger">
                 {% with messages = get_flashed_messages(category_filter=['register']) %}

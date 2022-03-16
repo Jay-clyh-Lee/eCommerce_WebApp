@@ -5,10 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Home Page</title>
+    <title>Pizza Time</title>
+    <style>
+        a {
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body class="d-flex justify-content-around">
-    <form action="/register" method="post" class="col-5 mx-auto rounded p-5 bg-dark text-white">
+<body class="mx-auto">
+    <div class="d-flex justify-content-between">
+        <h1>PIZZA PETE'S</h1>
+        <a href="/login">Already have an account? Login</a>
+    </div>
+    <form action="/register" method="post" class="col-5 mx-auto rounded p-5">
         <div class="bg-light text-danger">
             {% with messages = get_flashed_messages(category_filter=['register']) %}
                 {% if messages %}
