@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Home Page</title>
+</head>
+<body class="d-flex justify-content-around">
+    <form action="/register" method="post" class="col-5 mx-auto rounded p-5 bg-dark text-white">
+        <div class="bg-light text-danger">
+            {% with messages = get_flashed_messages(category_filter=['register']) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <h2>Error!</h2>
+                        {% for message in messages %}            
+                            <p>{{message}}</p>                    
+                        {% endfor %}
+                </div>                            
+                {% endif %}
+            {% endwith %}
+        </div>
+        <h1 class="text-primary">Register</h1>
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" name="address" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" name="city" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="state">State:</label>
+            <select name="state" class="form-control">
+                {% for item in states %}
+                    <option value="{{item.name}}">{{item.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" class="form-control">
+        </div>
+        <input type="submit" value="Register" class="my-3 btn btn-primary text-white">
+    </form>
+</body>
+</html>
