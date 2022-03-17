@@ -19,13 +19,15 @@ class User:
         self.state = db_data['state']
         self.cart = db_data['cart'] #init empty
         self.fave = db_data['fave'] #init empty
+
         self.created_at = db_data['created_at']
         self.updated_at = db_data['updated_at']
+        self.orders = []
 
     @classmethod
     def create_user(cls, form_data):
         query = "INSERT INTO users (first_name, last_name, email, password, address, city, state) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(address)s, %(city)s, %(state)s);"
-        return connectToMySQL(cls.db).query_db(query,form_data)
+        return connectToMySQL(cls.db).query_db(query, form_data)
 
     @classmethod
     def get_all(cls):
@@ -53,20 +55,24 @@ class User:
         return cls(results[0])
 
     @classmethod
-    def update_info():
-        query = "UPDATE users VALUE () where id = %(id)s;"
+    def add_to_cart():
+        query = "UPDATE users VALUE () WHERE id = %(id)s;"
         return 
+    
+    @classmethod
+    def check_out():
+        query = ";"
+        return "UPDATE users SET orders = %(order)s WHERE id = %(id)s;"
 
     @classmethod
-    def get_orders_by_id(cls,form_data):
-        query = "SELECT * FROM users JOIN orders ON orders.user_id = users.id JOIN orders ON orders.order_id = orders.id WHERE users.id = %(user_id)s;"
+    def get_orders_by_user_id(cls,form_data):
+        query = "SELECT * FROM users JOIN orders ON orders.user_id = users.id WHERE users.id = %(user_id)s;"
         results = connectToMySQL(cls.db).query_db(query,form_data)
         for row in results:
             this_user = cls(row)
-            data = {
+            order_form_data = {
                 "method" : row['method'],
                 "size" : row['size'],
-                "crust": row["crust"],
                 "crust": row["crust"],
                 "toppings": row["toppings"],
                 "quantity": row["quantity"],

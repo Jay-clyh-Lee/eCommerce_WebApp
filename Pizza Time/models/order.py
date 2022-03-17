@@ -11,18 +11,32 @@ class Order:
         self.size = db_data['size']
         self.crust = db_data['crust']
         self.toppings = db_data['toppings'] #list
-        self.price = db_data['price'] #float
+        self.price = db_data['price'] #float    d
         self.quantity = db_data['quantity'] #int
         self.favorite = db_data['favorite'] #boolean
         self.created_at = db_data['created_at']
         self.updated_at = db_data['updated_at']
         self.user_id = db_data['user_id']
-        self.user = None
-        self.buyers = []
+
+    def single_item_price(self, *items):
+        self.price = 0
+        price_tags = {"pick_up": 0, "delivery": 5, "large": 12, "medium": 8, "small": 5, "pepperoni": 3, "sausage": 3.5, "steak": 5, "pineapple": 4, "chicken": 4.5, "veggies": 4, "extra_cheese": 3, "extra_meat": 5, "regular": 0, "thin": 2, "stuffed": 5}
+        for item in items:
+            self.price += price_tags[item]
+        return self.price
+
+    def apply_tax(self, tax_rate):
+        tax_rate /= 100
+        self.price = self.price * (1 + tax_rate) 
+        return self.price
+
+    def calculate_final_price(self, quantity):
+        self.price = self.price * quantity
+        return self.price
 
     @classmethod
     def create_order(cls, form_data):
-        query = "INSERT INTO orders (method, size, crust, toppings, price, quantity, favorite, user_id) VALUES (%(method)s, %(size)s, %(crust)s, %(toppings)s, %(price)s,%(quantity)s, %(favorite)s, %(user_id)s);"
+        query = "INSERT INTO orders (method, size, crust, toppings, price, quantity, favorite, user_id) VALUES (%(method)s, %(size)s, %(crust)s, %(toppings)s, %(price)s ,%(quantity)s, %(favorite)s, %(user_id)s);"
         return connectToMySQL(cls.db).query_db(query, form_data)
 
     @classmethod

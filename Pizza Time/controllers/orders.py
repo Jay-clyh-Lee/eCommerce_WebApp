@@ -5,18 +5,29 @@ from config.mysqlconnection import connectToMySQL
 
 db = "pizza_time"
 
+@app.route('/orders/cart')
+def carting():
+    
+    
+    
+
+
+
+
 @app.route('/orders/create', methods=['POST'])
 def create():
     data = {
         "method" : request.form['method'],
         "size" : request.form['size'],
         "crust": request.form["crust"],
-        "crust": request.form["crust"],
         "toppings": request.form["toppings"],
         "quantity": request.form["quantity"],
         "favorite": request.form["favorite"],
         "user_id": session['user_id']
     }
+    order.Order.single_item_price(data["method"], data["size"], data["crust"], data["toppings"])
+    order.Order.apply_tax(5)
+    order.Order.calculate_final_price(data["quantity"])
     if not order.Order.validate_order(data):
         return redirect('/orders/new')
     order.Order.create_order(data)
@@ -54,7 +65,6 @@ def update(order_id):
     data = {
         "method" : request.form['method'],
         "size" : request.form['size'],
-        "crust": request.form["crust"],
         "crust": request.form["crust"],
         "toppings": request.form["toppings"],
         "quantity": request.form["quantity"],

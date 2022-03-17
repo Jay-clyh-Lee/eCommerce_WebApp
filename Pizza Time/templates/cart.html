@@ -31,7 +31,7 @@
             <a href="/logout" class="btn btn-success border-5 rounded-0 text-white">LOGOUT</a>
         </div>
     </header>
-    <main class="d-flex justify-content-around p-3">
+    <main class="d-flex flex-column justify-content-around p-3">
         <div>
             <h1>YOUR ORDER</h1>
             <p>METHOD {{order.method}}</p>
@@ -40,15 +40,17 @@
             <p>Crust: {{order.crust}}</p>
             <p>Toppings: {{order.toppings}}</p>
         </div>
-        <div>
+        <div class="mx-5">
             <p>{{order.price}}</p>
             <p>Tax: </p>
             <p>--------------------------------</p>
             <p>Total: </p>
         </div>
-        <div>
-            <a href="/orders/startover" class="btn btn-danger">Start Over</a>
-            <a href="/orders/purchase" class="btn btn-success">Purchase</a>
+        <div class="d-flex">
+            <a href="/orders/new" class="btn btn-danger">Start Over</a>
+            <form action="/orders/check_out" method="post">
+                <input type="submit" value="Check Out" class="btn btn-success text-white mx-3">
+            </form>
         </div>
     </main>
 </body>
