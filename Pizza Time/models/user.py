@@ -28,8 +28,8 @@ class User:
 
     @classmethod
     # for admin use
-    def get_all_users_join_orders(cls):
-        query = "SELECT * FROM users LEFT JOIN orders ON orders.user_id = users.id;"
+    def get_all_users_join_carts_and_orders(cls):
+        query = "SELECT * FROM users LEFT JOIN orders ON orders.user_id = users.id LEFT JOIN carts ON carts.user_id = users.id;"
         results = connectToMySQL(cls.db).query_db(query) 
         users = []
         for u in results:
@@ -47,22 +47,27 @@ class User:
 
     @classmethod
     # simplified for fetching user id
-    def get_only_user_by_id(cls,form_data):
+    def get_only_user_by_id(cls, form_data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        results = connectToMySQL(cls.db).query_db(query,form_data)
+        results = connectToMySQL(cls.db).query_db(query, form_data)
         if len(results) == 0:
             return False
         return cls(results[0])
 
     @classmethod
-    def add_to_cart():
-        query = "UPDATE users VALUE () WHERE id = %(id)s;"
-        return 
+    def add_to_cart(cls, form_data):
+        query = "INSERT INTO carts (quantity, price, user_id, product_id) VALUE (%(quantity)s, %(price)s, %(user_id)s, %(product_id)s);"
+        return connectToMySQL(cls.db).query_db(query, form_data)
     
     @classmethod
-    def check_out():
-        query = ";"
-        return "UPDATE users SET orders = %(order)s WHERE id = %(id)s;"
+    def clear_cart(cls, form_data):
+        query = "DELETE * FROM carts WHERE user_id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query, form_data)
+
+    @classmethod
+    def check_out(cls, form_data):
+        query = "INSERT INTO orders (quantity, price, user_id, product_id) VALUE (%(quantity)s, %(price)s, %(user_id)s, %(product_id)s);"
+        return connectToMySQL(cls.db).query_db(query, form_data)
 
     @classmethod
     def get_by_id(cls, form_data):
