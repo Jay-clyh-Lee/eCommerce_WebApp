@@ -31,6 +31,7 @@ def register():
         "city": request.form['city'],
         "state": request.form['state'],
     }
+    # remember use.User.create_user returns the id. It is coded in config.mysqlconnection.py
     session['user_id'] = user.User.create_user(user_data)
     return redirect('/dashboard')
 
@@ -57,11 +58,11 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route('/account')
+@app.route('/dashboard')
 def dashboard():
     if "user_id" not in session:
         return redirect('/')
     data = {
         "id": session["user_id"]
     }
-    return render_template("account.html", logged_in_user = user.User.get_by_id(data), all_orders = order.Order.get_all())
+    return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), all_orders = order.Order.get_all())

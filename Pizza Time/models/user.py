@@ -17,9 +17,6 @@ class User:
         self.address = db_data['address']
         self.city = db_data['city']
         self.state = db_data['state']
-        self.cart = db_data['cart'] #init empty
-        self.fave = db_data['fave'] #init empty
-
         self.created_at = db_data['created_at']
         self.updated_at = db_data['updated_at']
         self.orders = []
@@ -30,7 +27,8 @@ class User:
         return connectToMySQL(cls.db).query_db(query, form_data)
 
     @classmethod
-    def get_all(cls):
+    # for admin use
+    def get_all_users_join_orders(cls):
         query = "SELECT * FROM users LEFT JOIN orders ON orders.user_id = users.id;"
         results = connectToMySQL(cls.db).query_db(query) 
         users = []
@@ -39,15 +37,17 @@ class User:
         return users
 
     @classmethod
-    def get_by_email(cls,form_data):
+    # for login
+    def get_by_email(cls, form_data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        results = connectToMySQL(cls.db).query_db(query,form_data)
+        results = connectToMySQL(cls.db).query_db(query, form_data)
         if len(results) == 0:
             return False
-        return cls(results[0])
+        return cls(results[0]) 
 
     @classmethod
-    def get_by_id(cls,form_data):
+    # simplified for fetching user id
+    def get_only_user_by_id(cls,form_data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query,form_data)
         if len(results) == 0:
@@ -65,29 +65,23 @@ class User:
         return "UPDATE users SET orders = %(order)s WHERE id = %(id)s;"
 
     @classmethod
-    def get_orders_by_user_id(cls,form_data):
-        query = "SELECT * FROM users JOIN orders ON orders.user_id = users.id WHERE users.id = %(user_id)s;"
-        results = connectToMySQL(cls.db).query_db(query,form_data)
+    def get_by_id(cls, form_data):
+        # get a single user and all this user's orders
+        query = "SELECT * FROM users LEFT JOIN orders ON orders.user_id = users.id LEFT JOIN products ON products.id = orders.product_id WHERE users.id = %(user_id)s;"
+        results = connectToMySQL(cls.db).query_db(query, form_data)
         for row in results:
             this_user = cls(row)
-            order_form_data = {
+            order_data = {
                 "method" : row['method'],
                 "size" : row['size'],
                 "crust": row["crust"],
                 "toppings": row["toppings"],
-                "quantity": row["quantity"],
                 "favorite": row["favorite"],
+                "price": row["price"],
+                "quantity": row["quantity"],
+                "created_at": row["orders.created_at"],               
             }
-            order_form_data = {
-                "id": row["orders.id"],
-                'name': row['name'],
-                'description': row['description'],
-                'price': row['price'],  
-                'quantity': row['quantity'],
-                'created_at': row['users.created_at'],
-                'updated_at': row['users.updated_at'],
-            }
-            this_user.orderd_orders.append(order_form_data)
+            this_user.orders.append(order_data)
         if len(results) == 0:
             return False
         return cls(results[0])

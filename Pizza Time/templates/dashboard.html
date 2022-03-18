@@ -22,7 +22,7 @@
         <div id="nav" class="d-flex">
             <a href="/home" class="btn btn-success border-5 rounded-0 text-white">HOME</a>
             <a href="/order" class="btn btn-success border-5 rounded-0 text-white">ORDER</a>
-            <a href="/account" class="btn btn-success border-5 rounded-0 text-white">ACCOUNT</a>
+            <a href="/dashboard" class="btn btn-success border-5 rounded-0 text-white">ACCOUNT</a>
             <a href="/logout" class="btn btn-success border-5 rounded-0 text-white">LOGOUT</a>
         </div>
     </header>
@@ -94,7 +94,7 @@
                             , {{order.price}}
                         </p>
                     </div>
-                    <div style="overflow:auto" class="d-flex justify-content-between p-2">
+                    <!-- <div style="overflow:auto" class="d-flex justify-content-between p-2">
                         {% for buyers in painting.buyers %}
                             {% if logged_in_user.id == buyers["id"] %}
                                 <p>
@@ -102,7 +102,7 @@
                                 </p>
                             {% endif %}
                         {% endfor %}
-                    </div>
+                    </div> -->
                 {% endfor %}
             </div>
         </div>

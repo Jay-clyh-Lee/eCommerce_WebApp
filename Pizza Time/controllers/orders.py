@@ -1,5 +1,5 @@
 from flask import render_template, request, session, redirect, flash
-from models import user, order
+from models import user, order, product
 from __init__ import app
 from config.mysqlconnection import connectToMySQL
 
@@ -7,31 +7,37 @@ db = "pizza_time"
 
 @app.route('/orders/cart')
 def carting():
-    
-    
-    
-
 
 
 
 @app.route('/orders/create', methods=['POST'])
 def create():
-    data = {
+    product_data = {
         "method" : request.form['method'],
         "size" : request.form['size'],
         "crust": request.form["crust"],
         "toppings": request.form["toppings"],
-        "quantity": request.form["quantity"],
         "favorite": request.form["favorite"],
-        "user_id": session['user_id']
     }
-    order.Order.single_item_price(data["method"], data["size"], data["crust"], data["toppings"])
-    order.Order.apply_tax(5)
-    order.Order.calculate_final_price(data["quantity"])
-    if not order.Order.validate_order(data):
+    if not product.Product.validate_product(product_data):
         return redirect('/orders/new')
-    order.Order.create_order(data)
-    return redirect('/account')
+
+    final_price = order.Order.single_item_price(product_data["method"], product_data["size"], product_data["crust"], product_data["toppings"])
+    final_price = order.Order.calculate_final_price(request.form['quantity'], 7.5) #7.5 is tax%
+    
+    order_data = {
+        "quantity": request.form["quantity"],
+        "price": final_price,
+        "user_id": session['user_id'],
+        "product_id": session['product_id']
+    }
+    
+    if not order.Order.validate_order(order_data):
+        return redirect('/orders/new')
+
+    product.Product.create_product(product_data)
+    order.Order.create_order(order_data)
+    return redirect('/dashboard')
 
 @app.route('/orders/new')
 def new():
@@ -74,7 +80,7 @@ def update(order_id):
     if not order.order.validate_order(data):
         return redirect(f'/orders/edit/{order_id}')
     order.order.update_order(data)
-    return redirect('/account')
+    return redirect('/dashboard')
 
 @app.route('/orders/delete/<int:order_id>')
 def destroy(order_id):
@@ -82,7 +88,7 @@ def destroy(order_id):
         "id": order_id
     }
     order.order.destroy_order(data)
-    return redirect('/account')
+    return redirect('/dashboard')
 
 @app.route('/orders/<int:order_id>/buy', methods=['POST'])
 def buy_order(order_id):
