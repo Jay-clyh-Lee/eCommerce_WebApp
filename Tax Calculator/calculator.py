@@ -13,7 +13,8 @@ def federal_tax(income, annual=True):
     return tax
 
 print(federal_tax(115000))
-print(federal_tax(4423, False))
+
+print(federal_tax(4423, False)*26)
 print('asldfjalskdfj')
 
 tot = (115000 - 89075)*.24
@@ -21,4 +22,4 @@ tot += (89075 - 41775)*.22
 tot += (41775 - 10275)*.12
 tot += (10275)*.10
 print(tot)
-tot/26 
+tot/26
